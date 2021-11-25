@@ -16,7 +16,7 @@ namespace eCommerce.Models
 
 
         // Database 
-        public List<Movies> Movies { get; set; }
+        public List<Movie> Movies { get; set; }
 
 
     }
