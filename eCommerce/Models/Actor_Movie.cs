@@ -12,8 +12,5 @@ namespace eCommerce.Models
         public int ActorID { get; set; } // ActorID is the foreign key of the actor model
         public Actor Actor { get; set; }
 
-
-        //Database
-        public List<Actor_Movie> Actors_Movies { get; set; }
     }
 }

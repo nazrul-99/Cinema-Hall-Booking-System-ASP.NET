@@ -10,6 +10,7 @@ namespace eCommerce.Data
         Action = 1,
         Horror,
         Comedy, 
-        Drama
+        Drama, 
+        Documetary 
     }
 }
