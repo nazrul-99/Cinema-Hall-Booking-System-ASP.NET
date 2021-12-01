@@ -14,11 +14,11 @@ namespace eCommerce.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Price { get; set; }
+        public double Price { get; set; }
         public string ImageURL { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
-        public MovieCatagory MovieCatagory { get; set; }
+        public MovieCategory MovieCategory { get; set; }
 
 
         //Database
@@ -30,8 +30,8 @@ namespace eCommerce.Models
         public Cinema Cinema { get; set; }
 
         //Relation to Producer
-        public int PrducerID { get; set; }
-        [ForeignKey("PrducerID")]
-        public Producer Prducer { get; set; }
+        public int ProducerID { get; set; }
+        [ForeignKey("ProducerID")]
+        public Producer Producer { get; set; }
     }
 }

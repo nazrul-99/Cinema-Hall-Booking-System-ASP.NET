@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Data
 {
-    public enum MovieCatagory
+    public enum MovieCategory
     {
         Action = 1,
         Horror,
         Comedy, 
         Drama, 
-        Documetary 
+        Documentary 
     }
 }
