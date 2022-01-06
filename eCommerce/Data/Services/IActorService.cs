@@ -8,7 +8,7 @@ namespace eCommerce.Data.Services
 {
     public interface IActorService
     {
-        IEnumerable<Actor> GetAll();
+        Task<IEnumerable<Actor>> GetAll();
         Actor GetById(int id);
         void Add(Actor actor);
         Actor Update(int id, Actor newActor);
