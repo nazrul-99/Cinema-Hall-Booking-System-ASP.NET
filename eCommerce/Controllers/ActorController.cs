@@ -21,6 +21,12 @@ namespace eCommerce.Controllers
             var actors = await _service.GetAll();
             return View(actors);
         }
+
+        //Get request: Actor/Create 
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 
 }
