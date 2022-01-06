@@ -18,8 +18,9 @@ namespace eCommerce.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var movies = await _context.Cinemas.ToListAsync();
-            return View();
+            //Include cinema is added to the movie as it access the movie data
+            var movies = await _context.Movies.Include(n => n.Cinema).ToListAsync();
+            return View(movies);
         }
     }
 }
