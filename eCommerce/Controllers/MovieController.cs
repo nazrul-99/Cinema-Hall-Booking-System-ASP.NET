@@ -23,5 +23,12 @@ namespace eCommerce.Controllers
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(allMovies);
         }
+
+        //GET: Movies/Details/ID
+        public async Task<IActionResult> Details(int id)
+        {
+            var movieDetail = await _service.GetMovieByIdAsync(id);
+            return View(movieDetail);
+        }
     }
 }

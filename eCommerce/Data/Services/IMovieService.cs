@@ -11,6 +11,7 @@ namespace eCommerce.Data.Services
     {
         public interface IMovieService : IEntityBaseRepository<Movie>
         {
+            Task<Movie> GetMovieByIdAsync(int id);
         }
     }
 }
