@@ -1,4 +1,5 @@
 ﻿using eCommerce.Data;
+using eCommerce.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,16 +11,24 @@ namespace eCommerce.Controllers
 {
     public class ProducerController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProducerService _service;
 
-        public ProducerController(AppDbContext context)
+        public ProducerController(IProducerService service)
         {
-            _context = context;
+            _service = service;
         }
         public async Task<IActionResult> Index()
         {
-            var producers = await _context.Producers.ToListAsync();
+            var producers = await _service.GetAllAsync();
             return View(producers);
+        }
+
+        //GET: Producer/Details/ID
+        public async Task<IActionResult> Details(int id)
+        {
+            var producerDetails = await _service.GetByIdAsync(id);
+            if (producerDetails == null) return View("NotFound");
+            return View(producerDetails);
         }
     }
 }
