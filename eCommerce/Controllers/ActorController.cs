@@ -19,7 +19,7 @@ namespace eCommerce.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var actors = await _service.GetAll();
+            var actors = await _service.GetAllAsync();
             return View(actors);
         }
 
@@ -42,7 +42,7 @@ namespace eCommerce.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Actors/Details/1
+        //Get: Actors/Details/ID
         public async Task<IActionResult> Details(int id)
         {
             var actorDetails = await _service.GetByIdAsync(id);
@@ -51,7 +51,7 @@ namespace eCommerce.Controllers
             return View(actorDetails);
         }
 
-        //Get request: Actor/Create 
+        //Get request: Actor/Edit/ID 
         // As there is no data manupulation so we have not used the Task async
         public async Task<IActionResult> Edit(int id)
         {
@@ -71,6 +71,26 @@ namespace eCommerce.Controllers
             await _service.UpdateAsync(id, actor);
             return RedirectToAction(nameof(Index));
         }
-    }
 
+        //Get request: Actor/Delete/ID 
+        // As there is no data manupulation so we have not used the Task async
+        public async Task<IActionResult> Delete(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not Found");
+            return View(actorDetails);
+        }
+
+        //Updating an Actor Profile     
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("Not Found");
+
+            await _service.DeleteAsync(id);
+            return RedirectToAction(nameof(Index));
+        }
+
+    }
 }
