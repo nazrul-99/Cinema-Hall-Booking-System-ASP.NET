@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Data.Services
 {
-    public interface ICinemasService : IEntityBaseRepository<Cinema>
+    public interface ICinemaService : IEntityBaseRepository<Cinema>
     {
     }
 }

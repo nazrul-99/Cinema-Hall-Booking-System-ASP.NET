@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Data.Services
 {
-    public class CinemaService : EntityBaseRepository<Cinema>, ICinemaService
+    namespace eTickets.Data.Services
     {
-        public CinemaService(AppDbContext context) : base(context)
+        public interface IMovieService : IEntityBaseRepository<Movie>
         {
         }
     }

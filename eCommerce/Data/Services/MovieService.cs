@@ -1,4 +1,5 @@
 ﻿using eCommerce.Data.Base;
+using eCommerce.Data.Services.eTickets.Data.Services;
 using eCommerce.Models;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace eCommerce.Data.Services
 {
-    public class CinemaService : EntityBaseRepository<Cinema>, ICinemaService
+    public class MovieService : EntityBaseRepository<Movie>, IMovieService
     {
-        public CinemaService(AppDbContext context) : base(context)
+        public MovieService(AppDbContext context) : base(context)
         {
         }
     }

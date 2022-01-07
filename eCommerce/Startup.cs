@@ -1,5 +1,6 @@
 using eCommerce.Data;
 using eCommerce.Data.Services;
+using eCommerce.Data.Services.eTickets.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,7 +33,8 @@ namespace eCommerce
             //Services configuration
             services.AddScoped<IActorService, ActorService>();
             services.AddScoped<IProducerService, ProducerService>();
-            services.AddScoped<ICinemasService, CinemasService>();
+            services.AddScoped<ICinemaService, CinemaService>();
+            services.AddScoped<IMovieService, MovieService>();
 
             services.AddControllersWithViews();
         }

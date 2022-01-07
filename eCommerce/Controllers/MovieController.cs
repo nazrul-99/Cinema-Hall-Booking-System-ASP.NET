@@ -1,4 +1,5 @@
 ﻿using eCommerce.Data;
+using eCommerce.Data.Services.eTickets.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,17 +11,17 @@ namespace eCommerce.Controllers
 {
     public class MovieController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IMovieService _service;
 
-        public MovieController(AppDbContext context)
+        public MovieController(IMovieService service)
         {
-            _context = context;
+            _service = service;
         }
+
         public async Task<IActionResult> Index()
         {
-            //Include cinema is added to the movie as it access the movie data
-            var movies = await _context.Movies.Include(n => n.Cinema).ToListAsync();
-            return View(movies);
+            var allMovies = await _service.GetAllAsync(n => n.Cinema);
+            return View(allMovies);
         }
     }
 }

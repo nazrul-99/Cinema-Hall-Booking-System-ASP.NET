@@ -12,9 +12,9 @@ namespace eCommerce.Controllers
 {
     public class CinemaController : Controller
     {
-        private readonly ICinemasService _service;
+        private readonly ICinemaService _service;
 
-        public CinemaController(ICinemasService service)
+        public CinemaController(ICinemaService service)
         {
             _service = service;
         }
