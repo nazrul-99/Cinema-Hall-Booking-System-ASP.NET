@@ -32,6 +32,7 @@ namespace eCommerce
             //Services configuration
             services.AddScoped<IActorService, ActorService>();
             services.AddScoped<IProducerService, ProducerService>();
+            services.AddScoped<ICinemasService, CinemasService>();
 
             services.AddControllersWithViews();
         }
