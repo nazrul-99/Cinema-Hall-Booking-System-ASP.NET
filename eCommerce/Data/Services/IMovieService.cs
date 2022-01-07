@@ -1,4 +1,5 @@
 ﻿using eCommerce.Data.Base;
+using eCommerce.Data.ViewModels;
 using eCommerce.Models;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace eCommerce.Data.Services
         public interface IMovieService : IEntityBaseRepository<Movie>
         {
             Task<Movie> GetMovieByIdAsync(int id);
+            Task<NewMovieDropdownVM> GetNewMovieDropdownValues();
         }
     }
 }

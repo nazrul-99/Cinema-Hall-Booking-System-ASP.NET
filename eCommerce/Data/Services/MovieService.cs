@@ -1,5 +1,6 @@
 ﻿using eCommerce.Data.Base;
 using eCommerce.Data.Services.eTickets.Data.Services;
+using eCommerce.Data.ViewModels;
 using eCommerce.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,6 +27,19 @@ namespace eCommerce.Data.Services
                 .FirstOrDefaultAsync(n => n.ID == id);
 
             return movieDetails;
+        }
+
+
+        public async Task<NewMovieDropdownVM> GetNewMovieDropdownValues()
+        {
+            var response = new NewMovieDropdownVM()
+            {
+                Actors = await _context.Actors.OrderBy(n => n.FullName).ToListAsync(),
+                Cinemas = await _context.Cinemas.OrderBy(n => n.Name).ToListAsync(),
+                Producers = await _context.Producers.OrderBy(n => n.FullName).ToListAsync()
+            };
+
+            return response;
         }
     }
 }

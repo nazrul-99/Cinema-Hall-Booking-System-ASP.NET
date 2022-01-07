@@ -1,5 +1,7 @@
 ﻿@model NewMovieVM
 
+@using eCommerce.Data
+
 @{
     ViewData["Title"] = "Create a New Movie Entry";
 }
@@ -46,22 +48,22 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label asp-for="CinemaID" class="control-label"></label>
-                                <select asp-for="CinemaID" class="form-control"></select>
+                                <select asp-for="CinemaID" class="form-control" asp-items="ViewBag.Cinemas"></select>
                                 <span asp-validation-for="CinemaID" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="MovieCategory" class="control-label"></label>
-                                <select asp-for="MovieCategory" class="form-control"></select>
+                                <select asp-for="MovieCategory" class="form-control" asp-items="Html.GetEnumSelectList<MovieCategory>()"></select>
                                 <span asp-validation-for="MovieCategory" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="ProducerID" class="control-label"></label>
-                                <select asp-for="ProducerID" class="form-control"></select>
+                                <select asp-for="ProducerID" class="form-control" asp-items="ViewBag.Producers"></select>
                                 <span asp-validation-for="ProducerID" class="text-danger"></span>
                             </div>
                             <div class="form-group">
                                 <label asp-for="ActorIDs" class="control-label"></label>
-                                <select asp-for="ActorIDs" class="form-control" multiple></select>
+                                <select asp-for="ActorIDs" class="form-control" asp-items="ViewBag.Actors" multiple></select>
                                 <span asp-validation-for="ActorIDs" class="text-danger"></span>
                             </div>
                         </div>
@@ -93,7 +95,7 @@
 
 @section Scripts{
     <script>
-        $("ImageURL").on("change", function () {
+        $("#ImageURL").on("change", function () {
             var output = document.getElementById("ImageUrlPreview");
             output.src = $(this).val();
         })
