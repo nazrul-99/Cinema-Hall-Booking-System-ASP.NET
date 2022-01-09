@@ -18,6 +18,36 @@ namespace eCommerce.Data.Services
             _context = context;
         }
 
+        public async Task AddNewMovieAsync(NewMovieVM movie)
+        {
+            var newMovie = new Movie()
+            {
+                Name = movie.Name,
+                Description = movie.Description,
+                Price = movie.Price,
+                ImageURL = movie.ImageURL,
+                CinemaID = movie.CinemaID,
+                StartDate = movie.StartDate,
+                EndDate = movie.EndDate,
+                MovieCategory = movie.MovieCategory,
+                ProducerID = movie.ProducerID
+            };
+            await _context.Movies.AddAsync(newMovie);
+            await _context.SaveChangesAsync();
+
+            //Add Movie Actors
+            foreach (var actorId in movie.ActorIDs)
+            {
+                var newActorMovie = new Actor_Movie()
+                {
+                    MovieID = newMovie.ID,
+                    ActorID = actorId
+                };
+                await _context.Actors_Movies.AddAsync(newActorMovie);
+            }
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Movie> GetMovieByIdAsync(int id)
         {
             var movieDetails = await _context.Movies
