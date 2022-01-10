@@ -15,6 +15,7 @@ namespace eCommerce.Data.Services
             Task<Movie> GetMovieByIdAsync(int id);
             Task<NewMovieDropdownVM> GetNewMovieDropdownValues();
             Task AddNewMovieAsync(NewMovieVM data);
+            Task UpdateMovieAsync(NewMovieVM data);
         }
     }
 }
