@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCommerce.Data;
 
 namespace eCommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220110052115_OrderAndOrderItem_Added")]
+    partial class OrderAndOrderItem_Added
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,29 +199,6 @@ namespace eCommerce.Migrations
                     b.ToTable("Producers");
                 });
 
-            modelBuilder.Entity("eCommerce.Models.ShoppingCartItem", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MovieID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShoppingCartID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("MovieID");
-
-                    b.ToTable("ShoppingCartItems");
-                });
-
             modelBuilder.Entity("eCommerce.Models.Actor_Movie", b =>
                 {
                     b.HasOne("eCommerce.Models.Actor", "Actor")
@@ -275,15 +254,6 @@ namespace eCommerce.Migrations
                     b.Navigation("Movie");
 
                     b.Navigation("Order");
-                });
-
-            modelBuilder.Entity("eCommerce.Models.ShoppingCartItem", b =>
-                {
-                    b.HasOne("eCommerce.Models.Movie", "Movie")
-                        .WithMany()
-                        .HasForeignKey("MovieID");
-
-                    b.Navigation("Movie");
                 });
 
             modelBuilder.Entity("eCommerce.Models.Actor", b =>
