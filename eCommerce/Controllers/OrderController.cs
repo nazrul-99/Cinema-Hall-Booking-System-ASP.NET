@@ -33,5 +33,16 @@ namespace eCommerce.Controllers
 
             return View(response);
         }
+
+        public async Task<RedirectToActionResult> AddItemToShoppingCart(int iD)
+        {
+            var item = await _moviesService.GetMovieByIdAsync(iD);
+
+            if (item != null)
+            {
+                _shoppingCart.AddItemToCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCartSummary));
+        }
     }
 }
