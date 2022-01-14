@@ -1,5 +1,7 @@
 ﻿using eCommerce.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +58,17 @@ namespace eCommerce.Data.Cart
                 }
             }
             _context.SaveChanges();
+        }
+
+        public static ShoppingCart GetShoppingCart(IServiceProvider services)
+        {
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = services.GetService<AppDbContext>();
+
+            string cartID = session.GetString("CartID") ?? Guid.NewGuid().ToString();
+            session.SetString("CartID", cartID);
+
+            return new ShoppingCart(context) { ShoppingCartID = cartID };
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
