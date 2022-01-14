@@ -13,11 +13,14 @@ namespace eCommerce.Controllers
     {
         private readonly IMovieService _moviesService;
         private readonly ShoppingCart _shoppingCart;
+        private readonly IOrderService _ordersService;
 
-        public OrderController(IMovieService moviesService, ShoppingCart shoppingCart)
+
+        public OrderController(IMovieService moviesService, ShoppingCart shoppingCart, IOrderService ordersService)
         {
             _moviesService = moviesService;
             _shoppingCart = shoppingCart;
+            _ordersService = ordersService;
         }
 
         public IActionResult ShoppingCartSummary()
@@ -54,6 +57,18 @@ namespace eCommerce.Controllers
                 _shoppingCart.RemoveItemFromCart(item);
             }
             return RedirectToAction(nameof(ShoppingCartSummary));
+        }
+
+        public async Task<IActionResult> CompleteOrder()
+        {
+            var items = _shoppingCart.GetShoppingCartItems();
+            string userID = "";
+            string userEmailAddress = "";
+
+            await _ordersService.StoreOrderAsync(items, userID, userEmailAddress);
+            await _shoppingCart.ClearShoppingCartAsync();
+
+            return View("OrderCompleted");
         }
     }
 }
