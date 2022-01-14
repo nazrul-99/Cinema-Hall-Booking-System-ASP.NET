@@ -23,6 +23,14 @@ namespace eCommerce.Controllers
             _ordersService = ordersService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            string userID = "";
+
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userID);
+            return View(orders);
+        }
+
         public IActionResult ShoppingCartSummary()
         {
             var items = _shoppingCart.GetShoppingCartItems();
