@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace eCommerce.Controllers
@@ -25,9 +26,10 @@ namespace eCommerce.Controllers
 
         public async Task<IActionResult> Index()
         {
-            string userID = "";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
 
-            var orders = await _ordersService.GetOrdersByUserIdAsync(userID);
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userID, userRole);
             return View(orders);
         }
 
@@ -70,8 +72,8 @@ namespace eCommerce.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userID = "";
-            string userEmailAddress = "";
+            string userID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userEmailAddress = User.FindFirstValue(ClaimTypes.Email);
 
             await _ordersService.StoreOrderAsync(items, userID, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();

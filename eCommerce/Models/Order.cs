@@ -14,7 +14,10 @@ namespace eCommerce.Models
 
         public string Email { get; set; }
 
-        public string UserID { get; set; }      
+        public string UserID { get; set; }
+        [ForeignKey(nameof(UserID))]
+
+        public ApplicationUser User { get; set; }
     
         public List<OrderItem> OrderItems { get; set; }
     }
