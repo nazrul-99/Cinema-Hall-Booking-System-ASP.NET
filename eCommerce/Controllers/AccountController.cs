@@ -4,6 +4,7 @@ using eCommerce.Data.ViewModels;
 using eCommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,14 @@ namespace eCommerce.Controllers
             _signInManager = signInManager;
             _context = context;
         }
+
+
+        public async Task<IActionResult> User()
+        {
+            var users = await _context.Users.ToListAsync();
+            return View(users);
+        }
+
         public IActionResult Login() => View(new LogInVM());
 
           
