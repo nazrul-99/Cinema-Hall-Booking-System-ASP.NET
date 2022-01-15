@@ -10,8 +10,8 @@ using eCommerce.Data;
 namespace eCommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220114104814_Identity_Added")]
-    partial class Identity_Added
+    [Migration("20220115124732_Identity_User_Added")]
+    partial class Identity_User_Added
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

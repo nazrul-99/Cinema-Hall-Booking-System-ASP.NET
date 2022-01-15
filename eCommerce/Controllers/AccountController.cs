@@ -1,4 +1,5 @@
 ﻿using eCommerce.Data;
+using eCommerce.Data.ViewModels;
 using eCommerce.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,32 @@ namespace eCommerce.Controllers
             _signInManager = signInManager;
             _context = context;
         }
-        public IActionResult Index()
+        public IActionResult Login() => View(new LogInVM());
+
+          
+        [HttpPost]
+        public async Task<IActionResult> LogIn(LogInVM loginVM)
         {
-            return View();
+            if (!ModelState.IsValid) return View(loginVM);
+
+            var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
+            if (user != null)
+            {
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
+                if (passwordCheck)
+                {
+                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Movie");
+                    }
+                }
+                TempData["Error"] = "Wrong credentials. Please, try again!";
+                return View(loginVM);
+            }
+
+            TempData["Error"] = "Wrong credentials. Please, try again!";
+            return View(loginVM);
         }
     }
 }
